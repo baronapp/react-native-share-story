@@ -37,6 +37,8 @@ RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
     // This call is iOS 10+, can use 'setItems' depending on what versions you support
     [[UIPasteboard generalPasteboard] setItems:pasteboardItems options:pasteboardOptions];
     
+    
+    NSURL *urlScheme = [NSURL URLWithString:INSTAGRAM_STORIES_SCHEME];
     [[UIApplication sharedApplication] openURL:urlScheme options:@{} completionHandler:nil];
     
     resolve(@YES);
