@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.name         = "RNShareStory"
   s.version      = "1.0.0"
   s.summary      = "RNShareStory"
-  s.description  = "Ability to share video to instagram stories"
+  s.description  = "Ability to share video to instagram stories directly from react native."
   s.homepage     = "https://www.cameo.com"
   s.license      = "MIT"
   s.author             = { "author" => "author@domain.cn" }
