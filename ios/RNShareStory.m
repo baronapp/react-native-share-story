@@ -1,13 +1,15 @@
 
 #import "RNShareStory.h"
+#import <React/RCTLog.h>
 
 @implementation RNShareStory
 
-- (dispatch_queue_t)methodQueue
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 {
-    return dispatch_get_main_queue();
+    RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);
 }
-RCT_EXPORT_MODULE()
 
 @end
-  
+
