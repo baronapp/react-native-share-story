@@ -3,4 +3,8 @@ import { NativeModules } from 'react-native';
 
 const { RNShareStory } = NativeModules;
 
-export default RNShareStory;
+export default {
+  printMethod: () => {
+    console.log('Hello World')
+  }
+};
