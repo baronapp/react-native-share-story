@@ -15,8 +15,18 @@ public class RNShareStoryModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
+  /**
+   * This is a required method for the react native bridge.
+   * @return
+   */
   @Override
   public String getName() {
-    return "RNShareStory";
+    return "react-native-share-story";
   }
+
+  @ReactMethod
+  public void doSomething() {
+
+  }
+
 }
