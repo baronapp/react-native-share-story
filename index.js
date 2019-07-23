@@ -1,6 +1,21 @@
 
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
-const { RNShareStory } = NativeModules;
+const { RNShareStory, RNShareStoryModule } = NativeModules;
 
-export default RNShareStory;
+
+/**
+ *
+ * @param videoUrl {String} The Video URL to share.
+ */
+const shareVideoOnInstagram = (videoUrl) => {
+  if (Platform.OS === 'ios') {
+    RNShareStory.shareVideoOnInstagram(videoUrl);
+  } else {
+    RNShareStoryModule.shareVideoOnInstagram(videoUrl);
+  }
+};
+
+export default {
+  shareVideoOnInstagram,
+};
