@@ -35,7 +35,7 @@ RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
   NSURL *url = [NSURL URLWithString:videoUrl];
   NSData *videoData = [NSData dataWithContentsOfURL:(NSURL *)url];
 
-  // Assign background image asset and attribution link URL to pasteboard
+  /* Copy the video data into the clipboard */
   NSArray *pasteboardItems = @[@{@"com.instagram.sharedSticker.backgroundVideo" : videoData }];
   NSDictionary *pasteboardOptions = @{UIPasteboardOptionExpirationDate : [[NSDate date] dateByAddingTimeInterval:60 * 5]};
   // This call is iOS 10+, can use 'setItems' depending on what versions you support
