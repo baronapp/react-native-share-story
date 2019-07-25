@@ -22,11 +22,6 @@ RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
     return;
   }
 
-  if ([[UIApplication sharedApplication] canOpenURL:urlScheme]) {
-    reject(@"ig_share_failure", @"NOT_INSTALLED_ERROR", nil);
-    return;
-  }
-
   if (videoUrl == nil) {
     reject(@"ig_share_failure", @"GENERAL_ERROR", nil );
     return;
@@ -41,9 +36,14 @@ RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
   // This call is iOS 10+, can use 'setItems' depending on what versions you support
   [[UIPasteboard generalPasteboard] setItems:pasteboardItems options:pasteboardOptions];
 
-  [[UIApplication sharedApplication] openURL:urlScheme options:@{} completionHandler:nil];
-
-  resolve(@YES);
+  [[UIApplication sharedApplication] openURL:urlScheme options:@{} completionHandler:^(BOOL success) {
+    NSLog(@"Open: %d",success);
+    if (success == 1) {
+      resolve(@YES);
+    } else {
+      resolve(@NO);
+    }
+  }];
 }
 
 @end
