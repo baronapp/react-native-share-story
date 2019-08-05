@@ -199,7 +199,7 @@ public class RNShareStoryModule extends ReactContextBaseJavaModule {
                 promise.reject("ig_share_failure", NO_INSTALL_ERROR);
                 return;
             }
-            fileToShare = saveVideoFile(videoUrl);
+            fileToShare = saveVideoFile(contentUrl);
         } catch (Exception e) {
             e.printStackTrace();
             promise.reject("Unable to create a file to save video to", e);
