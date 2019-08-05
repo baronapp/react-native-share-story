@@ -7,23 +7,24 @@
 @implementation RNShareStory
 
 NSString *const INSTAGRAM_STORIES_SCHEME = @"instagram-stories://share";
+NSString *const UNSUPPORTED_VERSION = @"UNSUPPORTED_VERSION";
+NSString *const GENERAL_ERROR = @"GENERAL_ERROR";
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
+RCT_EXPORT_METHOD(shareRemoteUrlToInstagram:(nonnull NSString *)videoUrl
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
 
   NSURL *urlScheme = [NSURL URLWithString:INSTAGRAM_STORIES_SCHEME];
-
   if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
-    reject(@"ig_share_failure", @"UNSUPPORTED_IOS_VERSION", nil);
+    reject(@"ig_share_failure", UNSUPPORTED_VERSION, nil);
     return;
   }
 
   if (videoUrl == nil) {
-    reject(@"ig_share_failure", @"GENERAL_ERROR", nil );
+    reject(@"ig_share_failure", GENERAL_ERROR, nil );
     return;
   }
 
@@ -44,6 +45,32 @@ RCT_EXPORT_METHOD(shareVideoOnInstagram:(nonnull NSString *)videoUrl
       resolve(@NO);
     }
   }];
+}
+
+RCT_EXPORT_METHOD(shareVideoFileToInstagram:(nonnull NSString *)videoFileUrl
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+
+  NSString * urlString = [NSString stringWithFormat:@"instagram://library?AssetPath=%@", videoFileUrl];
+  NSURL *instagramCamera = [NSURL URLWithString:@"instagram://camera"];
+  NSURL *openLibrary = [NSURL URLWithString:@"instagram://library"];
+  NSURL * shareURL = [NSURL URLWithString:urlString];
+
+  if ([[UIApplication sharedApplication] canOpenURL:shareURL]) {
+    [[UIApplication sharedApplication] openURL:shareURL options:@{} completionHandler:^(BOOL success) {
+      NSLog(@"Open: %d",success);
+      if (success == 1) {
+        resolve(@YES);
+      } else {
+        resolve(@NO);
+      }
+    }];
+  } else {
+    // Cannot open instagram
+    NSString *stringURL = @"http://itunes.apple.com/app/instagram/id389801252";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    [[UIApplication sharedApplication] openURL:url];
+  }
 }
 
 @end
