@@ -1,53 +1,77 @@
-
 # react-native-share-story
+React Native Share Story, a simple tool for sharing videos to instagram.
 
-## Getting started
-
-`$ npm install react-native-share-story --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-share-story`
-
-### Manual installation
+# Getting started
+---
+```
+npm i --save https://github.com/baronapp/react-native-share-story-story.git
+```
+Currently, the master branch off this git repo is the stable version of this package. It will soon moved to a version controlled NPM package.
 
 
-#### iOS
+## Automatic Install
+``` 
+react-native link react-native-share-story
+```
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-share-story` and add `RNShareStory.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNShareStory.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+## Manual install
 
-#### Android
+### iOS Pods Install (Recommended)
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNShareStoryPackage;` to the imports at the top of the file
-  - Add `new RNShareStoryPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
+
+[Cocopoads](https://cocoapods.org/) to use react-native-share-story.
+
+You just need to add to your Podfile the react-native-share-story dependency.
+
+```ruby
+  # react-native-share-story pod
+  pod 'RNShare', :path => '../node_modules/react-native-share-story'
+```
+
+After that, just run a `pod install` or `pod udpate` to get up and running with react-native-share-story. 
+
+Then run a `react-native link react-native-share-story`.
+
+Btw, We also recommend reading this (amazing article)[https://shift.infinite.red/beginner-s-guide-to-using-cocoapods-with-react-native-46cb4d372995] about how pods and rn work together. =D
+
+### Android Install
+
+
+2. Open up `android/app/src/main/java/[...]/MainApplication.java`
+    - Add `import cl.json.RNSharePackage;` and `import cl.json.ShareApplication;` to the imports at the top of the file
+    - Add `new RNSharePackage()` to the list returned by the `getPackages()` method
+
+3. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-share-story'
   	project(':react-native-share-story').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-share-story/android')
   	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
+4. Insert the following lines inside the dependencies block in
+   `android/app/build.gradle`:
+
+    ```
       compile project(':react-native-share-story')
-  	```
+    ```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
+# Methods
+---
 
-1. In Visual Studio add the `RNShareStory.sln` in `node_modules/react-native-share-story/windows/RNShareStory.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Share.Story.RNShareStory;` to the usings at the top of the file
-  - Add `new RNShareStoryPackage()` to the `List<IReactPackage>` returned by the `Packages` method
+### shareVideoOnInstagram(remoteUrl)
+
+Share a video to instagram stories.
+
+Returns a promise that fulfills or rejects as soon as instagram opens or fails to open.
 
 
-## Usage
-```javascript
-import RNShareStory from 'react-native-share-story';
-
-// TODO: What to do with the module?
-RNShareStory;
+```jsx
+import RNShareStory from 'react-native-share-story'
+  Story.shareVideoOnInstagram('https://www.ExampleContentProvider.com/videoUrl.mp4')
+    .then((res) => { console.log(res) })
+    .catch((err) => { err && console.log(err); });
 ```
-  
+
+Supported options:
+
+| Name  | Type     | Description |
+| :---- | :------: | :--- |
+| remoteUrl | string   | Remote http location of mp4 content (will support local file Url in near future). |
