@@ -26,19 +26,18 @@ import java.net.URLConnection;
  * This class contains all methods necessary to share videos to instagram
  * from a react-native application.
  *
- * // WARNING: This class is not yet production ready.
- * Before deploying, all code should be reviewed, and tested appropriately.
+ *
+ * The share method this class uses is a general share. It is intended to
+ * share videos with instagram, but it will allow a user to share any video
+ * url to any application that will accept this file type.
  */
 public class RNShareStoryModule extends ReactContextBaseJavaModule {
 
     private static final String INSTAGRAM_PACKAGE_NAME = "com.instagram.android";
-    private static final String INSTAGRAM_STORIES_SHARE = "com.instagram.share.ADD_TO_STORY";
 
     private static final String NO_INSTALL_ERROR = "NOT_INSTALLED_ERROR";
     private static final String UNSUPPORTED_VERSION = "UNSUPPORTED_VERSION";
     private static final String GENERAL_ERROR = "GENERAL_ERROR";
-
-
 
     private final ReactApplicationContext reactContext;
 

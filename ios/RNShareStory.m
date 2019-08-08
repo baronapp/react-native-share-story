@@ -38,39 +38,12 @@ RCT_EXPORT_METHOD(shareRemoteUrlToInstagram:(nonnull NSString *)videoUrl
   [[UIPasteboard generalPasteboard] setItems:pasteboardItems options:pasteboardOptions];
 
   [[UIApplication sharedApplication] openURL:urlScheme options:@{} completionHandler:^(BOOL success) {
-    NSLog(@"Open: %d",success);
     if (success == 1) {
       resolve(@YES);
     } else {
       resolve(@NO);
     }
   }];
-}
-
-RCT_EXPORT_METHOD(shareVideoFileToInstagram:(nonnull NSString *)videoFileUrl
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject) {
-
-  NSString * urlString = [NSString stringWithFormat:@"instagram://library?AssetPath=%@", videoFileUrl];
-  NSURL *instagramCamera = [NSURL URLWithString:@"instagram://camera"];
-  NSURL *openLibrary = [NSURL URLWithString:@"instagram://library"];
-  NSURL * shareURL = [NSURL URLWithString:urlString];
-
-  if ([[UIApplication sharedApplication] canOpenURL:shareURL]) {
-    [[UIApplication sharedApplication] openURL:shareURL options:@{} completionHandler:^(BOOL success) {
-      NSLog(@"Open: %d",success);
-      if (success == 1) {
-        resolve(@YES);
-      } else {
-        resolve(@NO);
-      }
-    }];
-  } else {
-    // Cannot open instagram
-    NSString *stringURL = @"http://itunes.apple.com/app/instagram/id389801252";
-    NSURL *url = [NSURL URLWithString:stringURL];
-    [[UIApplication sharedApplication] openURL:url];
-  }
 }
 
 @end

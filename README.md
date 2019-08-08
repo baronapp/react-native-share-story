@@ -1,5 +1,5 @@
 # react-native-share-story
-React Native Share Story, a simple tool for sharing videos to instagram.
+React Native Share Story, a simple tool for sharing videos to instagram. Check out the [Facebook Docs](https://developers.facebook.com/docs/instagram/sharing-to-stories) for reference.
 
 # Getting started
 ---
