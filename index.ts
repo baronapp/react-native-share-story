@@ -19,7 +19,7 @@ const UNSUPPORTED_VERSION: string = 'UNSUPPORTED_VERSION'
  * @param videoUrl {String} The Video URL to share.
  * @return {Promise<void>} A promise with the action to open instagram.
  */
-const shareVideoOnInstagram = (videoUrl: string): Promise<void> => {
+const shareVideoOnInstagram = (videoUrl: string): Promise<boolean> => {
   if (Platform.OS === 'ios') {
     return RNShareStory.shareRemoteUrlToInstagram(videoUrl);
   } else {
