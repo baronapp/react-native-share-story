@@ -1,6 +1,6 @@
 {
-  "name": "react-native-share-story",
-  "version": "1.0.2",
+  "name": "cameo-react-native-share-story",
+  "version": "1.0.3",
   "description": "",
   "main": "index.ts",
   "scripts": {
